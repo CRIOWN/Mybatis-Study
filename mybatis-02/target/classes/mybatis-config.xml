@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <properties resource="db.properties">
+        <property name="username" value="root"/>
+        <property name="pwd" value="123456"/>
+<!--优先外部配置文件-->
+    </properties>
+
+    <!--别名
+    1.typeAlias <typeAlias type="com.criown.pojo.User" alias="User"/>-->
+    <typeAliases>
+        <!-- 2.package 包所在位置-->
+       <package name="com.criown.pojo"/>
+    </typeAliases>
+    <environments default="test">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useUnicode=true&amp;characterEncoding=UTF8&amp;useSSL=FALSE&amp;serverTimezone=GMT%2B8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+
+        <environment id="test">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${pwd}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="com/criown/dao/UserMapper.xml"/>
+    </mappers>
+
+</configuration>
